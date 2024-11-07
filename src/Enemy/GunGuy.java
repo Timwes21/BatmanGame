@@ -15,11 +15,11 @@ public class GunGuy extends Enemy {
 		super(x, y, WIDTH, HEIGHT, gp, batman, health);
 		sprites = new Sprites();
 		attackFrequency = 40;
-		bullets = new ArrayList<>();
 		standingSprite= sprites.gunGuyStanding;
 		attackSprites = sprites.gunGuyShooting;
 		walkingSprites = sprites.gunGuyWalking;
 		dyingSprites = sprites.gunGuyDying;
+		knockedOutSprites = sprites.gunGuyKnockedOut;
 		currentSpritePath = standingSprite;
 	}
 	
@@ -42,17 +42,7 @@ public class GunGuy extends Enemy {
 	
 	@Override
 	public void damage() {
-		if (bullets.size() > 0) {
-			for (int i=0;i<bullets.size();i++) {
-				if (bullets.get(i).x >= batman.x+10 && bullets.get(i).x <= batman.x +70 && batman.y > 300) {
-					if (batman.block == false) {
-						batman.health -= 20;
-						bullets.remove(i);
-						
-					}
-				}
-			}
-		}
+		
 	}
 	@Override
 	public void move() {
@@ -72,30 +62,20 @@ public class GunGuy extends Enemy {
 	
 	public void shoot() {
 		if (currentSpritePath == attackSprites[1]) {
-			if (bullets.size() < 1) {
-				bullets.add(new Bullet(right, x, y, gp));
+				shoot = true;
 		}
-	}
+		else {
+			shoot = false;
+		}
 	}
 	
-	public void removeBullet() {
-		if (bullets.size() > 0) {
-			for(int i=0;i<bullets.size();i++) {
-				bullets.get(i).move();
-				if (bullets.get(i).x < 0 || bullets.get(i).x > gp.WIDTH) {
-					bullets.remove(bullets.get(i));
-				
-				}
-			}
-		}
-	}
+
 
 
 
 	@Override
 	public void addedMethods() {
 		shoot();
-		removeBullet();
 		
 	}
 	

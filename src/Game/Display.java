@@ -8,12 +8,14 @@ import java.awt.Image;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.ImageIcon;
 
 import Enemy.Enemy;
 import Enemy.Sprites;
+import Projectiles.Bullet;
 
 public class Display {
 	int WIDTH;
@@ -93,7 +95,7 @@ public class Display {
     	g2.drawString("Press Enter to Continue", WIDTH/2-100, HEIGHT/2+50);
 	}
 	
-	public void game(boolean pause, boolean dead, TheBatman batman, List<Enemy> enemies, int wave, int enemyDefeats, Graphics2D g2) {
+	public void game(boolean pause, boolean dead, TheBatman batman, List<Enemy> enemies, int wave, int enemyDefeats, List<Bullet> bullets, Graphics2D g2) {
 		g2.drawImage(BG, 0, 0, WIDTH+50, HEIGHT+25, gp);
 		g2.drawImage(SIGNAL, 0, 0, 200, 400, gp);
 		g2.drawImage(BUILDINGS, 0, 102, WIDTH+2, 350, gp);
@@ -103,9 +105,20 @@ public class Display {
 		batman.draw(g2);
 		
 		//draws all the enemies		
-		if (enemies.size() > 0) {
-			for (Enemy enemy:enemies) 
-				enemy.draw(g2);
+		List<Enemy> enemiesCopy = new ArrayList<>(enemies);
+		for (Enemy enemy : enemiesCopy) {
+		    enemy.draw(g2);
+		}
+		
+		List<Bullet> bulletsCopy = new ArrayList<>(bullets);
+		if(bulletsCopy != null) {
+			if (bulletsCopy.size() > 0) {	
+			    Iterator<Bullet> iterator = bulletsCopy.iterator();
+			    while (iterator.hasNext()) {
+			    	Bullet bullet = iterator.next();
+				    bullet.draw(g2);
+			    }
+			}
 		}
 			
 		

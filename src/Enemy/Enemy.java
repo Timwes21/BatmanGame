@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
@@ -28,7 +29,7 @@ public abstract class Enemy{
 	boolean flipImage;
 	boolean standing;
 	boolean left;
-	boolean right;
+	public boolean right;
 	public boolean alive = true;
 	boolean strike;
 	public boolean knockedOut;
@@ -48,7 +49,6 @@ public abstract class Enemy{
 	String[] dyingSprites = {};
 	String[] knockedOutSprites = {};
 	String currentSpritePath;
-	ArrayList<Bullet> bullets;
 	ArrayList<Axe> axes;
 	Sprites sprites;
 	
@@ -58,6 +58,7 @@ public abstract class Enemy{
 	boolean inRange;
 	public boolean damageRange;
 	public boolean rangDamageRange;
+	public boolean shoot;
 	
 	public Enemy(int x, int y, int WIDTH, int HEIGHT, GamePanel gp, TheBatman batman, int health){
 		this.x = x;
@@ -85,15 +86,6 @@ public abstract class Enemy{
 		g2.setColor(Color.green);
 		g2.fillRect(x, y-20, (int)(health *.80), 8);
 		
-		if(bullets != null) {
-			if (bullets.size() > 0) {	
-			    Iterator<Bullet> iterator = bullets.iterator();
-			    while (iterator.hasNext()) {
-			    	Bullet bullet = iterator.next();
-				    bullet.draw(g2);
-			    }
-			}
-		}
 		
 		if (axes != null) {
 			if (axes.size() > 0) {

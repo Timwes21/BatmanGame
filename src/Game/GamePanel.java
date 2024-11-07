@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -17,6 +18,7 @@ import Enemy.KnifeGuy;
 import Enemy.Mime;
 import Enemy.RocketGuy;
 import Enemy.Runner;
+import Projectiles.Bullet;
 
 public class GamePanel extends JPanel implements Runnable{
 	public int WIDTH = 1000;
@@ -41,6 +43,7 @@ public class GamePanel extends JPanel implements Runnable{
 	boolean spawn;
 	boolean dead;
 	Display display;
+	ArrayList<Bullet> bullets;
 	//JLabel emblem;
 
 	
@@ -62,6 +65,7 @@ public class GamePanel extends JPanel implements Runnable{
 		mainMenu = true;
 		dead = false;
 		display = new Display(WIDTH, HEIGHT, this);
+		bullets = new ArrayList<>();
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -72,7 +76,7 @@ public class GamePanel extends JPanel implements Runnable{
     	}
     	else{
     		//draws background and scenery
-			display.game(pause, dead, batman, enemies, wave, enemyDefeats, g2);
+			display.game(pause, dead, batman, enemies, wave, enemyDefeats, bullets, g2);
     	}
     	
 
@@ -108,9 +112,9 @@ public class GamePanel extends JPanel implements Runnable{
 						dead = false;
 						batman.movement(enemies);
 						enemyMovement();
-						checkEnemyDeath();
 						spawnEnemy();
 						progressWave();
+						handleBullets();
 						//System.out.println(enemies.size());
 					}
 					else {
@@ -134,12 +138,43 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	public void spawnEnemy() {
 		int EnemySpawnX = rand.nextInt(200, 950);
-		if (enemies.size() <  (wave * 2) - takeAway) {
-			RocketGuy enemy = new RocketGuy(EnemySpawnX, EnemySpawnY, 90, 100, this, batman, 100);
-			enemies.add(enemy);
+		//KnifeGuys being added
+		if (enemies.size() < (wave * 2) - takeAway && wave < 6 && wave < 20) {
+			GunGuy enemy2 = new GunGuy(EnemySpawnX, EnemySpawnY, 90, 100, this, batman, 100);
+			enemies.add(enemy2);
 			takeAway++;
-			
 		}
+		
+		/*if (enemies.size() <  (wave * 2) - takeAway && wave < 6) {
+			KnifeGuy enemy1 = new KnifeGuy(EnemySpawnX, EnemySpawnY, 90, 100, this, batman, 100);
+			enemies.add(enemy1);
+			takeAway++;
+		}
+		if (enemies.size() < (wave * 2) - takeAway && wave < 6 && wave < 20) {
+			GunGuy enemy2 = new GunGuy(EnemySpawnX, EnemySpawnY, 90, 100, this, batman, 100);
+			enemies.add(enemy2);
+			takeAway++;
+		}
+		if (enemies.size() < (wave/2) - takeAway && wave > 9) {
+			Mime enemy3 = new Mime(EnemySpawnX, EnemySpawnY, 90, 100, this, batman, 100);
+			enemies.add(enemy3);
+			takeAway++;
+		}
+		if (enemies.size() < (wave/2) - takeAway && wave > 19) {
+			AxeGuy enemy4 = new AxeGuy(EnemySpawnX, EnemySpawnY, 90, 100, this, batman, 100);
+			enemies.add(enemy4);
+			takeAway++;
+		}
+		if (enemies.size() < (wave/2) - takeAway && wave > 24) {
+			FlameMime enemy5 = new FlameMime(EnemySpawnX, EnemySpawnY, 90, 100, this, batman, 100);
+			enemies.add(enemy5);
+			takeAway++;
+		}
+		if (enemies.size() < (wave/2) - takeAway && wave > 30) {
+			RocketGuy enemy6 = new RocketGuy(EnemySpawnX, EnemySpawnY, 90, 100, this, batman, 100);
+			enemies.add(enemy6);
+			takeAway++;
+		}*/
 		
 	}
 	
@@ -153,18 +188,22 @@ public class GamePanel extends JPanel implements Runnable{
 		}
 	}
 	
-	public void enemyMovement() {		
-		for (Enemy enemy:enemies) {
-			enemy.movement();
-			}
-		}
 
 	
-	public void checkEnemyDeath() {
-		for (int i=0;i<enemies.size();i++) {
-			if (enemies.get(i).alive == false ) {
-				enemies.remove(i);
+	public void enemyMovement() {
+		System.out.println(bullets.size());
+		Iterator<Enemy> iterator = enemies.iterator();
+		while (iterator.hasNext()) {
+			Enemy enemy = iterator.next();
+			enemy.movement();
+			if (enemy.alive == false ) {
+				iterator.remove();
 				enemyDefeats +=1;
+				
+			}
+			if (enemy.shoot) {
+				bullets.add(new Bullet(enemy.right, enemy.x, enemy.y, this));
+				enemy.shoot = false;
 				
 			}
 		}
@@ -191,6 +230,23 @@ public class GamePanel extends JPanel implements Runnable{
 			batman.health = 100;
 			
 		}
+	}
+	
+	
+	public void handleBullets() {
+		Iterator<Bullet> iterator = bullets.iterator();
+	    while (iterator.hasNext()) {
+	    	Bullet bullet = iterator.next();
+		    bullet.damage(batman);
+		    bullet.move();
+		    if (bullet.hit) {
+		    	iterator.remove();		    	
+		    }
+		    if(bullet.x > WIDTH || bullet.x < 0) {
+		    	iterator.remove();
+		    }
+		    //if (bullet.x)
+	    }
 	}
 
 }
