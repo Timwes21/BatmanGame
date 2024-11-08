@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
+import Batman.TheBatman;
 import Enemy.Enemy;
 import Enemy.Sprites;
 import Projectiles.Bullet;

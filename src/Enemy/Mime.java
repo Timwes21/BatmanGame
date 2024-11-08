@@ -2,8 +2,8 @@ package Enemy;
 
 import java.util.ArrayList;
 
+import Batman.TheBatman;
 import Game.GamePanel;
-import Game.TheBatman;
 
 public class Mime extends Enemy {
 

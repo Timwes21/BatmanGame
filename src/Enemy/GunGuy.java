@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
+import Batman.TheBatman;
 import Game.GamePanel;
-import Game.TheBatman;
 import Projectiles.Bullet;
 
 public class GunGuy extends Enemy {
@@ -21,6 +21,7 @@ public class GunGuy extends Enemy {
 		dyingSprites = sprites.gunGuyDying;
 		knockedOutSprites = sprites.gunGuyKnockedOut;
 		currentSpritePath = standingSprite;
+		layingSprite = 3; 
 	}
 	
 	@Override
@@ -62,10 +63,10 @@ public class GunGuy extends Enemy {
 	
 	public void shoot() {
 		if (currentSpritePath == attackSprites[1]) {
-				shoot = true;
+				shootBullet = true;
 		}
 		else {
-			shoot = false;
+			shootBullet = false;
 		}
 	}
 	

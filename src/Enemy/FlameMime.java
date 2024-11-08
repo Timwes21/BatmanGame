@@ -6,8 +6,8 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
+import Batman.TheBatman;
 import Game.GamePanel;
-import Game.TheBatman;
 
 public class FlameMime extends Enemy{
 	

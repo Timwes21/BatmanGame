@@ -10,6 +10,7 @@ import java.util.Random;
 
 import javax.swing.JPanel;
 
+import Batman.TheBatman;
 import Enemy.AxeGuy;
 import Enemy.Enemy;
 import Enemy.FlameMime;
@@ -18,6 +19,7 @@ import Enemy.KnifeGuy;
 import Enemy.Mime;
 import Enemy.RocketGuy;
 import Enemy.Runner;
+import Projectiles.Axe;
 import Projectiles.Bullet;
 
 public class GamePanel extends JPanel implements Runnable{
@@ -33,6 +35,9 @@ public class GamePanel extends JPanel implements Runnable{
 	int healthBonus;
 	int enemyDefeats;
 	List<Enemy> enemies = new ArrayList<>();
+	List<GunGuy> gunGuys = new ArrayList<>();
+	List<AxeGuy> axeGuys = new ArrayList<>();
+	List<RocketGuy> rocketGuys = new ArrayList<>();
 	boolean pause;
 	boolean mainMenu;
 	int playerStartingX = 100/2;
@@ -44,6 +49,7 @@ public class GamePanel extends JPanel implements Runnable{
 	boolean dead;
 	Display display;
 	ArrayList<Bullet> bullets;
+	ArrayList<Axe> axes;
 	//JLabel emblem;
 
 	
@@ -66,6 +72,7 @@ public class GamePanel extends JPanel implements Runnable{
 		dead = false;
 		display = new Display(WIDTH, HEIGHT, this);
 		bullets = new ArrayList<>();
+		axes = new ArrayList<>();
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -140,7 +147,7 @@ public class GamePanel extends JPanel implements Runnable{
 		int EnemySpawnX = rand.nextInt(200, 950);
 		//KnifeGuys being added
 		if (enemies.size() < (wave * 2) - takeAway && wave < 6 && wave < 20) {
-			GunGuy enemy2 = new GunGuy(EnemySpawnX, EnemySpawnY, 90, 100, this, batman, 100);
+			AxeGuy enemy2 = new AxeGuy(EnemySpawnX, EnemySpawnY, 90, 100, this, batman, 100);
 			enemies.add(enemy2);
 			takeAway++;
 		}
@@ -201,11 +208,19 @@ public class GamePanel extends JPanel implements Runnable{
 				enemyDefeats +=1;
 				
 			}
-			if (enemy.shoot) {
+			if (enemy.shootBullet) {
 				bullets.add(new Bullet(enemy.right, enemy.x, enemy.y, this));
-				enemy.shoot = false;
+				enemy.shootBullet = false;
 				
 			}
+			
+			if (enemy.throwAxe) {
+				axes.add(new Axe(enemy.right, enemy.x, enemy.y, this));
+				enemy.throwAxe = false;
+				
+			}
+			
+			
 		}
 	}
 	
@@ -225,12 +240,14 @@ public class GamePanel extends JPanel implements Runnable{
 			batman.x = playerStartingX;
 			batman.y = playerStartingY;
 			enemies.clear();
+			bullets.clear();
 			
 			wave = 0;
 			batman.health = 100;
 			
 		}
 	}
+	
 	
 	
 	public void handleBullets() {
@@ -243,6 +260,23 @@ public class GamePanel extends JPanel implements Runnable{
 		    	iterator.remove();		    	
 		    }
 		    if(bullet.x > WIDTH || bullet.x < 0) {
+		    	iterator.remove();
+		    }
+		    //if (bullet.x)
+	    }
+	}
+	
+	
+	public void handleAxes() {
+		Iterator<Axe> iterator = axes.iterator();
+	    while (iterator.hasNext()) {
+	    	Axe axe = iterator.next();
+		    axe.damage(batman);
+		    axe.move();
+		    if (axe.hit) {
+		    	iterator.remove();		    	
+		    }
+		    if(axe.x > WIDTH || axe.x < 0) {
 		    	iterator.remove();
 		    }
 		    //if (bullet.x)

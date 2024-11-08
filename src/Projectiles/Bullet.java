@@ -3,8 +3,8 @@ package Projectiles;
 import java.awt.Color;
 import java.awt.Graphics2D;//38-41 walk, 42-47 backflip, 48-51 kick, 52-55 dying
 
+import Batman.TheBatman;
 import Game.GamePanel;
-import Game.TheBatman;
 
 public class Bullet extends Projectile{
 

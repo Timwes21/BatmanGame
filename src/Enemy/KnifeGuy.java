@@ -4,8 +4,8 @@ package Enemy;
 
 
 
+import Batman.TheBatman;
 import Game.GamePanel;
-import Game.TheBatman;
 	
 	
 	
@@ -21,7 +21,9 @@ public class KnifeGuy extends Enemy{
 		attackSprites = sprites.knifeGuyStabbingSprites;
 		walkingSprites = sprites.knifeGuyWalkingSprites;
 		dyingSprites = sprites.knifeGuyDyingSprites;
+		knockedOutSprites = sprites.knifeGuyDyingSprites;
 		currentSpritePath = standingSprite;
+		layingSprite = 3;
 	}
 
 

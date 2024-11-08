@@ -8,8 +8,8 @@ import java.util.Iterator;
 
 import javax.swing.ImageIcon;
 
+import Batman.TheBatman;
 import Game.GamePanel;
-import Game.TheBatman;
 import Projectiles.Batarang;
 import Projectiles.Bullet;
 

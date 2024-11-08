@@ -1,4 +1,4 @@
-package Game;
+package Batman;
 
 import java.awt.Color;
 
@@ -26,6 +26,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Enemy.Enemy;
+import Game.GamePanel;
+import Game.KeyHandler;
 import Projectiles.Batarang;
 
 public class TheBatman extends Rectangle{
@@ -46,7 +48,7 @@ public class TheBatman extends Rectangle{
 	public int health;
 	int batarnagAmount;
 	int counter;
-	int healthCopy;
+	public int healthCopy;
 	float index = 0;
 	float jumpSpeed = 7.5f;
 	float jumpIndex = 0;
@@ -93,7 +95,7 @@ public class TheBatman extends Rectangle{
 	//141-144
 	
 	
-	TheBatman(int x, int y, GamePanel gp, KeyHandler keys, int health, int healthCopy){
+	public TheBatman(int x, int y, GamePanel gp, KeyHandler keys, int health, int healthCopy){
 		this.x = x;
 		this.y = y;
 		this.gp = gp;
@@ -479,7 +481,8 @@ public class TheBatman extends Rectangle{
 		    for (int i=0;i<batarangs.size();i++) {
 		    	batarangs.get(i).move(enemiesSize);
 				if (enemy.rangDamageRange) {
-					enemy.health -=100;	
+					enemy.health -=5;	
+					enemy.knockedOut = true;
 					batarangs.remove(i);
 					enemy.rangDamageRange = false;
 				}

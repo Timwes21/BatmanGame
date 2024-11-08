@@ -10,22 +10,37 @@ import java.util.Random;
 
 import javax.swing.ImageIcon;
 
+import Batman.TheBatman;
 import Projectiles.Axe;
 import Projectiles.Batarang;
 import Projectiles.Bullet;
 import Game.GamePanel;
-import Game.TheBatman;
 
 
 public abstract class Enemy{
 	Random rand = new Random();
 	int moveSpeed = rand.nextInt(1, 4);
-	float movementSpeed = .1f;
+	public int x;
+	public int y;
+	public int health;
+	int healthBarX = x;
+	int healthBarY = y-20;
 	int awarenessLeft;
 	int awarenessRight;
+	int attackFrequency = 20;
+	public int displayLackOfHealth;
+	public int WIDTH;
+	public int HEIGHT;
+	int layingSprite;
+
+	
+	float movementSpeed = .1f;
 	float strikeTracker = 1;
 	float index;
-	int attackFrequency = 20;
+	protected float indexx;
+	float sleepTracker;
+	
+	
 	boolean flipImage;
 	boolean standing;
 	boolean left;
@@ -34,31 +49,26 @@ public abstract class Enemy{
 	boolean strike;
 	public boolean knockedOut;
 	public boolean drawBullet;
-	TheBatman batman;
-	public int health;
-	public int x;
-	public int y;
-	int healthBarX = x;
-	int healthBarY = y-20;
-	public int WIDTH;
-	public int HEIGHT;
-	public int displayLackOfHealth;
+	public boolean damageRange;
+	public boolean rangDamageRange;
+	public boolean shootBullet;
+	public boolean shootRocket;
+	public boolean throwAxe;
+	boolean inRange;
+
+	
 	String standingSprite;
 	String[] attackSprites = {};
 	String[] walkingSprites = {};
 	String[] dyingSprites = {};
 	String[] knockedOutSprites = {};
 	String currentSpritePath;
-	ArrayList<Axe> axes;
-	Sprites sprites;
 	
+	
+	ArrayList<Axe> axes;
 	GamePanel gp;
-	private int knockedOutIndex;
-	protected float indexx;
-	boolean inRange;
-	public boolean damageRange;
-	public boolean rangDamageRange;
-	public boolean shoot;
+	TheBatman batman;
+	Sprites sprites;
 	
 	public Enemy(int x, int y, int WIDTH, int HEIGHT, GamePanel gp, TheBatman batman, int health){
 		this.x = x;
@@ -160,7 +170,7 @@ public abstract class Enemy{
 			if (strike) {
 				strike = animate(attackSprites, strike);
 			}
-			else {//if the spriteTracker is divisible by 20, enemy will stab
+			else {
 				strikeTracker += .5;
 				if (strikeTracker % attackFrequency == 0) {
 					strike = true;
@@ -175,13 +185,22 @@ public abstract class Enemy{
 	}
 	
 	public void knockout() {
-		if (knockedOut) {
-			knockedOut = animate(knockedOutSprites, knockedOut);		
+		sleepTracker += .5;
+		System.out.println(sleepTracker);	
+		if (currentSpritePath == knockedOutSprites[layingSprite]) {
+			currentSpritePath = knockedOutSprites[layingSprite];
+			if (sleepTracker > 200) {
+				knockedOut = false;
+				sleepTracker = 0;
+				}
+			}
+		else if (knockedOut) {
+			animate(knockedOutSprites);	
 		}
 	}
 	
 	public void damage() {
-		if (currentSpritePath == attackSprites[3]) {//Batman takes damage if enemy is stabbing
+		if (currentSpritePath == attackSprites[layingSprite]) {//Batman takes damage if enemy is stabbing
 			if (batman.block == false)
 				batman.health -= 5;
 		}
