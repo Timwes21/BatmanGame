@@ -29,7 +29,7 @@ public class RocketGuy extends Enemy{
 		knockedOutSprites = sprites.RocketGuyKnockedOut;
 		currentSpritePath = standingSprite;
 		attackFrequency = 70;
-		bullets = new ArrayList<>();
+		layingSprite = 2;
 	}
 	
 	@Override

@@ -69,6 +69,7 @@ public abstract class Enemy{
 	GamePanel gp;
 	TheBatman batman;
 	Sprites sprites;
+	public int ammo;
 	
 	public Enemy(int x, int y, int WIDTH, int HEIGHT, GamePanel gp, TheBatman batman, int health){
 		this.x = x;
@@ -97,15 +98,7 @@ public abstract class Enemy{
 		g2.fillRect(x, y-20, (int)(health *.80), 8);
 		
 		
-		if (axes != null) {
-			if (axes.size() > 0) {
-				Iterator<Axe> iterator = axes.iterator();
-			    while (iterator.hasNext()) {
-			    	Axe axe = iterator.next();
-				    axe.draw(g2);
-			    }
-			}
-		}
+
 		
 		
 		/*if (axes.size() > 0) {	
@@ -125,6 +118,7 @@ public abstract class Enemy{
 		if(health > 0) {
 			if (knockedOut) {
 				knockout();
+				throwAxe = false;
 			}
 			else {
 				move();	

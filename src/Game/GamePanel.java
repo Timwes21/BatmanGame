@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -34,7 +35,7 @@ public class GamePanel extends JPanel implements Runnable{
 	int takeAway;
 	int healthBonus;
 	int enemyDefeats;
-	List<Enemy> enemies = new ArrayList<>();
+	public List<Enemy> enemies = new ArrayList<>();
 	List<GunGuy> gunGuys = new ArrayList<>();
 	List<AxeGuy> axeGuys = new ArrayList<>();
 	List<RocketGuy> rocketGuys = new ArrayList<>();
@@ -43,14 +44,15 @@ public class GamePanel extends JPanel implements Runnable{
 	int playerStartingX = 100/2;
 	int playerStartingY = 500 - 195;
 	KeyHandler keys = new KeyHandler();
-	TheBatman batman = new TheBatman(playerStartingX, playerStartingY, this, keys, 100, 100);
+	TheBatman batman;
 	int waveNumber = 1;
 	boolean spawn;
 	boolean dead;
 	Display display;
 	ArrayList<Bullet> bullets;
-	ArrayList<Axe> axes;
-	//JLabel emblem;
+	public ArrayList<Axe> axes;
+	ArrayList<Bullet> rockets;
+	HashMap<List<Enemy>, List<Axe>> AxeGuys;
 
 	
 	
@@ -73,6 +75,7 @@ public class GamePanel extends JPanel implements Runnable{
 		display = new Display(WIDTH, HEIGHT, this);
 		bullets = new ArrayList<>();
 		axes = new ArrayList<>();
+		batman = new TheBatman(playerStartingX, playerStartingY, this, keys, 100, 100);
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -83,7 +86,7 @@ public class GamePanel extends JPanel implements Runnable{
     	}
     	else{
     		//draws background and scenery
-			display.game(pause, dead, batman, enemies, wave, enemyDefeats, bullets, g2);
+			display.game(pause, dead, batman, enemies, wave, enemyDefeats, bullets, axes, g2);
     	}
     	
 
@@ -122,6 +125,7 @@ public class GamePanel extends JPanel implements Runnable{
 						spawnEnemy();
 						progressWave();
 						handleBullets();
+						handleAxes();
 						//System.out.println(enemies.size());
 					}
 					else {
@@ -147,8 +151,9 @@ public class GamePanel extends JPanel implements Runnable{
 		int EnemySpawnX = rand.nextInt(200, 950);
 		//KnifeGuys being added
 		if (enemies.size() < (wave * 2) - takeAway && wave < 6 && wave < 20) {
-			AxeGuy enemy2 = new AxeGuy(EnemySpawnX, EnemySpawnY, 90, 100, this, batman, 100);
-			enemies.add(enemy2);
+			
+			Mime enemy3 = new Mime(EnemySpawnX, EnemySpawnY, 90, 100, this, batman, 100);
+			enemies.add(enemy3);
 			takeAway++;
 		}
 		
@@ -198,7 +203,7 @@ public class GamePanel extends JPanel implements Runnable{
 
 	
 	public void enemyMovement() {
-		System.out.println(bullets.size());
+		System.out.println(axes.size());
 		Iterator<Enemy> iterator = enemies.iterator();
 		while (iterator.hasNext()) {
 			Enemy enemy = iterator.next();
@@ -214,14 +219,18 @@ public class GamePanel extends JPanel implements Runnable{
 				
 			}
 			
-			if (enemy.throwAxe) {
+			if (enemy.throwAxe && enemy.ammo == 1) {
 				axes.add(new Axe(enemy.right, enemy.x, enemy.y, this));
 				enemy.throwAxe = false;
+				enemy.ammo = 0;
 				
 			}
 			
 			
 		}
+		
+		
+		
 	}
 	
 	public void pauseTracker() {
@@ -268,6 +277,7 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	
 	public void handleAxes() {
+		System.out.println(axes.size());
 		Iterator<Axe> iterator = axes.iterator();
 	    while (iterator.hasNext()) {
 	    	Axe axe = iterator.next();
@@ -279,7 +289,7 @@ public class GamePanel extends JPanel implements Runnable{
 		    if(axe.x > WIDTH || axe.x < 0) {
 		    	iterator.remove();
 		    }
-		    //if (bullet.x)
+		    
 	    }
 	}
 

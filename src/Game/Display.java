@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import Batman.TheBatman;
 import Enemy.Enemy;
 import Enemy.Sprites;
+import Projectiles.Axe;
 import Projectiles.Bullet;
 
 public class Display {
@@ -96,7 +97,7 @@ public class Display {
     	g2.drawString("Press Enter to Continue", WIDTH/2-100, HEIGHT/2+50);
 	}
 	
-	public void game(boolean pause, boolean dead, TheBatman batman, List<Enemy> enemies, int wave, int enemyDefeats, List<Bullet> bullets, Graphics2D g2) {
+	public void game(boolean pause, boolean dead, TheBatman batman, List<Enemy> enemies, int wave, int enemyDefeats, List<Bullet> bullets, List<Axe> axes, Graphics2D g2) {
 		g2.drawImage(BG, 0, 0, WIDTH+50, HEIGHT+25, gp);
 		g2.drawImage(SIGNAL, 0, 0, 200, 400, gp);
 		g2.drawImage(BUILDINGS, 0, 102, WIDTH+2, 350, gp);
@@ -121,6 +122,17 @@ public class Display {
 			    }
 			}
 		}
+		
+		
+		List<Axe> axesCopy = new ArrayList<>(axes);
+			if (axesCopy.size() > 0) {
+				Iterator<Axe> iterator = axesCopy.iterator();
+			    while (iterator.hasNext()) {
+			    	Axe axe = iterator.next();
+				    axe.draw(g2);
+			    }
+			}
+		
 			
 		
 		g2.setColor(Color.white);

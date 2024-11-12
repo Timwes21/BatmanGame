@@ -11,7 +11,6 @@ import Game.GamePanel;
 
 public class FlameMime extends Enemy{
 	
-	private int damageIndex;
 
 
 	public FlameMime(int x, int y, int WIDTH, int HEIGHT, GamePanel gp, TheBatman batman, int health) {
@@ -23,6 +22,7 @@ public class FlameMime extends Enemy{
 		dyingSprites = sprites.flameMimeDying;
 		knockedOutSprites = sprites.flameMimeKnockedOut;
 		currentSpritePath = standingSprite;
+		layingSprite = 2;
 		
 	}
 	

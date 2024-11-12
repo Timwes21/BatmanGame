@@ -21,7 +21,7 @@ public class Mime extends Enemy {
 		this.y = y-5;
 		sprites = new Sprites();
 		attackFrequency = 40;
-		bullets = new ArrayList<>();
+		//bullets = new ArrayList<>();
 		standingSprite= sprites.mimeStanding;
 		attackSprites = sprites.mimeKicking;
 		walkingSprites = sprites.mimeWalking;
@@ -31,6 +31,7 @@ public class Mime extends Enemy {
 		currentSpritePath = standingSprite;
 		drawBullet = true;
 		moveSpeed = 2;
+		layingSprite = 3;
 	}
 	
 	

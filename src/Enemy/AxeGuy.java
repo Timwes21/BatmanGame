@@ -11,6 +11,9 @@ import Projectiles.Projectile;
 public class AxeGuy extends Enemy{
 	Sprites sprites;
 	String[] throwAxeSprites = {};
+	boolean strike2;
+	double strike2Tracker;
+	private double ammoCooldown;
 	
 	public AxeGuy(int x, int y, int WIDTH, int HEIGHT, GamePanel gp, TheBatman batman, int health) {
 		super(x, y, WIDTH, HEIGHT, gp, batman, health);
@@ -25,20 +28,22 @@ public class AxeGuy extends Enemy{
 		currentSpritePath = standingSprite;
 		this.y = y -6;
 		layingSprite = 2;
+		ammo = 1;
 		
 	}
 
 	
 	public void attack2() {
-		System.out.println(strikeTracker);
+		//System.out.println(knockedOut);
 		if (inRange == false) {
-			if (throwAxe) {
-				throwAxe = animate(throwAxeSprites, throwAxe);
+			//System.out.println(true);
+			if (strike2 && ammo == 1) {
+				strike2 = animate(throwAxeSprites, strike2);
 			}
 			else {//if the spriteTracker is divisible by 20, enemy will stab
-				strikeTracker += .5;
-				if (strikeTracker % attackFrequency == 0) {
-					throwAxe = true;
+				strike2Tracker += .5;
+				if (strike2Tracker % 80 == 0) {
+					strike2 = true;
 				}
 			}	
 		}
@@ -59,8 +64,16 @@ public class AxeGuy extends Enemy{
 	public void addedMethods() {
 		attack2();
 		throwAxe();
+		ammoCooldown();
 		
 		
+	}
+	
+	public void ammoCooldown() {
+		ammoCooldown += .5;
+		if (ammoCooldown % 80 == 0) {
+			ammo = 1;
+		}
 	}
 
 
