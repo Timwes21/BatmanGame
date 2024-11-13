@@ -10,7 +10,7 @@
 
 
 ## Installation
-1. Clone this repository: `git clone https://github.com/your-username/2d-batman-game.git`
+1. Clone this repository: `git clone https://github.com/Timwes21/BatmanGame.git`
 2. Open the project in your IDE (e.g., Eclipse or IntelliJ).
 3. Run the main class to start the game.
 
