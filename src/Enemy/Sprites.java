@@ -49,7 +49,7 @@ public class Sprites {
 	String RocketGuyIdle = "Rocket Launcher\\shoot\\shoot4.png";
 	String[] RocketGuyHit = {"Rocket Launcher\\dying\\dying1.png", "Rocket Launcher\\dying\\dying1.png", "Rocket Launcher\\dying\\dying1.png"};
 	public String[] RocketGuyShoot = {"Rocket Launcher\\shoot\\shoot1.png", "Rocket Launcher\\shoot\\shoot2.png", "Rocket Launcher\\shoot\\shoot3.png", "Rocket Launcher\\shoot\\shoot4.png", "Rocket Launcher\\shoot\\shoot5.png", "Rocket Launcher\\shoot\\shoot6.png", "Rocket Launcher\\shoot\\shoot7.png", "Rocket Launcher\\shoot\\shoot8.png", "Rocket Launcher\\shoot\\shoot9.png", "Rocket Launcher\\shoot\\shoot10.png"};
-	String[] RocketGuyKnockedOut = {"Rocket Launcher\\dying\\dying1.png", "Rocket Launcher\\dying\\dying2.png", "Rocket Launcher\\dying\\dying3.png"};
+	String[] RocketGuyKnockedOut = {"Rocket Launcher\\dying\\dying1.png", "Rocket Launcher\\dying\\dying2.png", "Rocket Launcher\\dying\\dying3.png", "Rocket Launcher\\dying\\dying4.png"};
 
 
 	

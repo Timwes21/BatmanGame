@@ -15,6 +15,7 @@ import Projectiles.Bullet;
 
 public class RocketGuy extends Enemy{
 	private int bulletX;
+	double ammoCooldown;
 
 
 	public RocketGuy(int x, int y, int WIDTH, int HEIGHT, GamePanel gp, TheBatman batman, int health) {
@@ -29,7 +30,8 @@ public class RocketGuy extends Enemy{
 		knockedOutSprites = sprites.RocketGuyKnockedOut;
 		currentSpritePath = standingSprite;
 		attackFrequency = 70;
-		layingSprite = 2;
+		layingSprite = 3;
+		ammo =1;
 	}
 	
 	@Override
@@ -46,17 +48,7 @@ public class RocketGuy extends Enemy{
 		g2.fillRect(x+40, y-20, displayLackOfHealth, 8);
 		g2.setColor(Color.green);
 		g2.fillRect(x+40, y-20, (int)(health *.80), 8);
-		
-		
-		if(bullets != null) {
-			if (bullets.size() > 0) {	
-			    Iterator<Bullet> iterator = bullets.iterator();
-			    while (iterator.hasNext()) {
-			    	Bullet bullet = iterator.next();
-				    bullet.draw(g2);
-			    }
-			}
-		}
+	
 		
 	}
 	
@@ -68,45 +60,18 @@ public class RocketGuy extends Enemy{
 	
 	@Override
 	public void damage() {
-		if (bullets.size() > 0) {
-			for (int i=0;i<bullets.size();i++) {
-				if (bullets.get(i).x >= batman.x+10 && bullets.get(i).x <= batman.x +70 && batman.y > 300) {
-					if (batman.block == false) {
-						batman.health -= 50;
-						bullets.remove(i);
-						
-					}
-				}
-			}
-		}
 	}
 	
 	public void shoot() {
 		if (currentSpritePath == attackSprites[4]) {
-			if (bullets.size() < 1) {
-				if (left) {
-					bulletX = x+20;
-				}
-				else {
-					bulletX = x+65;
-				}
-				
-				bullets.add(new Bullet(right, bulletX, y+16, gp));
+			shootRocket = true;
 		}
-	}
+		else {
+			shootRocket = false;
+		}
 	}
 	
-	public void removeBullet() {
-		if (bullets.size() > 0) {
-			for(int i=0;i<bullets.size();i++) {
-				bullets.get(i).move();
-				if (bullets.get(i).x < 0 || bullets.get(i).x > gp.WIDTH) {
-					bullets.remove(bullets.get(i));
-				
-				}
-			}
-		}
-	}
+
 	
 	@Override
 	public void attack() {
@@ -165,8 +130,13 @@ public class RocketGuy extends Enemy{
 		}
 	}
 
-	//101-110 attack
-	//111-114
+	public void ammoCooldown() {
+		ammoCooldown += .5;
+		if (ammoCooldown % 80 == 0) {
+			ammo = 1;
+			//ammoCooldown = 0;
+		}
+	}
 
 	
 
@@ -174,7 +144,7 @@ public class RocketGuy extends Enemy{
 	public void addedMethods() {
 		// TODO Auto-generated method stub
 		shoot();
-		removeBullet();
+		ammoCooldown();
 	}
 
 }

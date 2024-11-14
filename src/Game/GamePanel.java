@@ -24,6 +24,10 @@ import Projectiles.Axe;
 import Projectiles.Bullet;
 
 public class GamePanel extends JPanel implements Runnable{
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
 	public int WIDTH = 1000;
 	int HEIGHT = 500;
 	Random rand = new Random();
@@ -75,6 +79,7 @@ public class GamePanel extends JPanel implements Runnable{
 		display = new Display(WIDTH, HEIGHT, this);
 		bullets = new ArrayList<>();
 		axes = new ArrayList<>();
+		rockets = new ArrayList<>();
 		batman = new TheBatman(playerStartingX, playerStartingY, this, keys, 100, 100);
 	}
 	
@@ -86,7 +91,7 @@ public class GamePanel extends JPanel implements Runnable{
     	}
     	else{
     		//draws background and scenery
-			display.game(pause, dead, batman, enemies, wave, enemyDefeats, bullets, axes, g2);
+			display.game(pause, dead, batman, enemies, wave, enemyDefeats, bullets, axes, rockets, g2);
     	}
     	
 
@@ -126,6 +131,7 @@ public class GamePanel extends JPanel implements Runnable{
 						progressWave();
 						handleBullets();
 						handleAxes();
+						handleRockets();
 						//System.out.println(enemies.size());
 					}
 					else {
@@ -152,7 +158,7 @@ public class GamePanel extends JPanel implements Runnable{
 		//KnifeGuys being added
 		if (enemies.size() < (wave * 2) - takeAway && wave < 6 && wave < 20) {
 			
-			Mime enemy3 = new Mime(EnemySpawnX, EnemySpawnY, 90, 100, this, batman, 100);
+			RocketGuy enemy3 = new RocketGuy(EnemySpawnX, EnemySpawnY, 90, 100, this, batman, 100);
 			enemies.add(enemy3);
 			takeAway++;
 		}
@@ -226,6 +232,12 @@ public class GamePanel extends JPanel implements Runnable{
 				
 			}
 			
+			if (enemy.shootRocket && enemy.ammo == 1) {
+				rockets.add(new Bullet(enemy.right, enemy.x, enemy.y+16, this));
+				enemy.shootRocket = false;
+				enemy.ammo = 0;
+				
+			}
 			
 		}
 		
@@ -250,6 +262,8 @@ public class GamePanel extends JPanel implements Runnable{
 			batman.y = playerStartingY;
 			enemies.clear();
 			bullets.clear();
+			axes.clear();
+			rockets.clear();
 			
 			wave = 0;
 			batman.health = 100;
@@ -290,6 +304,22 @@ public class GamePanel extends JPanel implements Runnable{
 		    	iterator.remove();
 		    }
 		    
+	    }
+	}
+	
+	public void handleRockets() {
+		Iterator<Bullet> iterator = rockets.iterator();
+	    while (iterator.hasNext()) {
+	    	Bullet rocket = iterator.next();
+		    rocket.damage(batman);
+		    rocket.move();
+		    if (rocket.hit) {
+		    	iterator.remove();		    	
+		    }
+		    if(rocket.x > WIDTH || rocket.x < 0) {
+		    	iterator.remove();
+		    }
+		    //if (bullet.x)
 	    }
 	}
 

@@ -37,7 +37,7 @@ public class AxeGuy extends Enemy{
 		//System.out.println(knockedOut);
 		if (inRange == false) {
 			//System.out.println(true);
-			if (strike2 && ammo == 1) {
+			if (strike2) {
 				strike2 = animate(throwAxeSprites, strike2);
 			}
 			else {//if the spriteTracker is divisible by 20, enemy will stab
@@ -71,8 +71,9 @@ public class AxeGuy extends Enemy{
 	
 	public void ammoCooldown() {
 		ammoCooldown += .5;
-		if (ammoCooldown % 80 == 0) {
+		if (ammoCooldown  == 80) {
 			ammo = 1;
+			ammoCooldown = 0;
 		}
 	}
 

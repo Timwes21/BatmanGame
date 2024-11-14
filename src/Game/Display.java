@@ -97,7 +97,7 @@ public class Display {
     	g2.drawString("Press Enter to Continue", WIDTH/2-100, HEIGHT/2+50);
 	}
 	
-	public void game(boolean pause, boolean dead, TheBatman batman, List<Enemy> enemies, int wave, int enemyDefeats, List<Bullet> bullets, List<Axe> axes, Graphics2D g2) {
+	public void game(boolean pause, boolean dead, TheBatman batman, List<Enemy> enemies, int wave, int enemyDefeats, List<Bullet> bullets, List<Axe> axes, List<Bullet> rockets, Graphics2D g2) {
 		g2.drawImage(BG, 0, 0, WIDTH+50, HEIGHT+25, gp);
 		g2.drawImage(SIGNAL, 0, 0, 200, 400, gp);
 		g2.drawImage(BUILDINGS, 0, 102, WIDTH+2, 350, gp);
@@ -133,7 +133,16 @@ public class Display {
 			    }
 			}
 		
+			List<Bullet> rocketsCopy = new ArrayList<>(rockets);
 			
+				if (rocketsCopy.size() > 0) {	
+				    Iterator<Bullet> iterator = rocketsCopy.iterator();
+				    while (iterator.hasNext()) {
+				    	Bullet rocket = iterator.next();
+					    rocket.draw(g2);
+				    }
+				}
+				
 		
 		g2.setColor(Color.white);
 		g2.setFont(batFont2);
