@@ -35,7 +35,6 @@
 
 
 ## Future Improvements
-- Add new enemy types with unique behaviors.
 - Implement power-ups for Batman.
 - Enhance animations and graphics.
 - Add proper bullet, axe and rocket animations.
