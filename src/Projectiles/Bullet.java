@@ -10,8 +10,8 @@ public class Bullet extends Projectile{
 
 	public boolean hit;
 
-	public Bullet(boolean right, int x, int y, GamePanel gp) {
-		super(right, x, y, gp);
+	public Bullet(boolean right, int x, int y, GamePanel gp, int size) {
+		super(right, x, y, gp, size);
 		if (right) {
 			Direction = true;
 			this.x = x+100;				

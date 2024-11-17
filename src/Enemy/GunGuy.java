@@ -72,11 +72,12 @@ public class GunGuy extends Enemy {
 	
 
 
-
+	
 
 	@Override
 	public void addedMethods() {
 		shoot();
+
 		
 	}
 	

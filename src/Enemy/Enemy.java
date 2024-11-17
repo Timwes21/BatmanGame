@@ -70,6 +70,7 @@ public abstract class Enemy{
 	TheBatman batman;
 	Sprites sprites;
 	public int ammo;
+	protected boolean laying;
 	
 	public Enemy(int x, int y, int WIDTH, int HEIGHT, GamePanel gp, TheBatman batman, int health){
 		this.x = x;
@@ -179,9 +180,9 @@ public abstract class Enemy{
 	}
 	
 	public void knockout() {
-		sleepTracker += .5;
-		System.out.println(sleepTracker);	
+		sleepTracker += .5;	
 		if (currentSpritePath == knockedOutSprites[layingSprite]) {
+			laying = true;
 			currentSpritePath = knockedOutSprites[layingSprite];
 			if (sleepTracker > 200) {
 				knockedOut = false;
@@ -194,7 +195,7 @@ public abstract class Enemy{
 	}
 	
 	public void damage() {
-		if (currentSpritePath == attackSprites[layingSprite]) {//Batman takes damage if enemy is stabbing
+		if (currentSpritePath == attackSprites[2]) {//Batman takes damage if enemy is stabbing
 			if (batman.block == false)
 				batman.health -= 5;
 		}

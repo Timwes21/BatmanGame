@@ -19,9 +19,10 @@ public class Projectile{
 	String spritePath;
 	String[] sprites = {};
 	int adjustVertical;
+	int size;
 	
 	
-	public Projectile(boolean right, int x, int y , GamePanel gp) {
+	public Projectile(boolean right, int x, int y , GamePanel gp, int size) {
 		adjustVertical = 0;
 		if (right) {
 			Direction = true;
@@ -33,6 +34,7 @@ public class Projectile{
 		this.y = y + 12;
 		vel = 4;
 		this.gp = gp;
+		this.size = size;
 	}
 	
 	public void draw(Graphics2D g2) {
@@ -43,7 +45,7 @@ public class Projectile{
 		}
 		else {
 			g2.setColor(Color.black);
-			g2.fillOval(x, y, 10, 10);
+			g2.fillOval(x, y, size, size);
 			
 		}
 	}

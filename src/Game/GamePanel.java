@@ -1,6 +1,7 @@
 package Game;
 
 import java.awt.Dimension;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -19,7 +20,6 @@ import Enemy.GunGuy;
 import Enemy.KnifeGuy;
 import Enemy.Mime;
 import Enemy.RocketGuy;
-import Enemy.Runner;
 import Projectiles.Axe;
 import Projectiles.Bullet;
 
@@ -27,7 +27,6 @@ public class GamePanel extends JPanel implements Runnable{
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 1L;
 	public int WIDTH = 1000;
 	int HEIGHT = 500;
 	Random rand = new Random();
@@ -155,15 +154,15 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	public void spawnEnemy() {
 		int EnemySpawnX = rand.nextInt(200, 950);
-		//KnifeGuys being added
-		if (enemies.size() < (wave * 2) - takeAway && wave < 6 && wave < 20) {
+		//testing block
+		/*if (enemies.size() < (wave * 2) - takeAway && wave < 6 && wave < 20) {
 			
 			RocketGuy enemy3 = new RocketGuy(EnemySpawnX, EnemySpawnY, 90, 100, this, batman, 100);
 			enemies.add(enemy3);
 			takeAway++;
-		}
+		}*/
 		
-		/*if (enemies.size() <  (wave * 2) - takeAway && wave < 6) {
+		if (enemies.size() <  (wave * 2) - takeAway && wave < 6) {
 			KnifeGuy enemy1 = new KnifeGuy(EnemySpawnX, EnemySpawnY, 90, 100, this, batman, 100);
 			enemies.add(enemy1);
 			takeAway++;
@@ -192,7 +191,7 @@ public class GamePanel extends JPanel implements Runnable{
 			RocketGuy enemy6 = new RocketGuy(EnemySpawnX, EnemySpawnY, 90, 100, this, batman, 100);
 			enemies.add(enemy6);
 			takeAway++;
-		}*/
+		}
 		
 	}
 	
@@ -209,7 +208,6 @@ public class GamePanel extends JPanel implements Runnable{
 
 	
 	public void enemyMovement() {
-		System.out.println(axes.size());
 		Iterator<Enemy> iterator = enemies.iterator();
 		while (iterator.hasNext()) {
 			Enemy enemy = iterator.next();
@@ -220,7 +218,7 @@ public class GamePanel extends JPanel implements Runnable{
 				
 			}
 			if (enemy.shootBullet) {
-				bullets.add(new Bullet(enemy.right, enemy.x, enemy.y, this));
+				bullets.add(new Bullet(enemy.right, enemy.x, enemy.y, this, 5));
 				enemy.shootBullet = false;
 				
 			}
@@ -233,7 +231,7 @@ public class GamePanel extends JPanel implements Runnable{
 			}
 			
 			if (enemy.shootRocket && enemy.ammo == 1) {
-				rockets.add(new Bullet(enemy.right, enemy.x, enemy.y+16, this));
+				rockets.add(new Bullet(enemy.right, enemy.x, enemy.y+16, this, 10));
 				enemy.shootRocket = false;
 				enemy.ammo = 0;
 				

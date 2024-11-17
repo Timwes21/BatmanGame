@@ -274,7 +274,7 @@ public class TheBatman extends Rectangle{
 			
 			if (currentSpritePath == throwingSprites[5]) {
 				if (batarangs.size() < 1) 
-					batarangs.add(new Batarang(right, x, y, gp));					
+					batarangs.add(new Batarang(right, x, y, gp, 20));					
 				
 			}
 		}

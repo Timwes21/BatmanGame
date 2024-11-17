@@ -12,11 +12,12 @@ public class Batarang extends Projectile{
 	String[] batarangSprites = {"batarang\\batarang1.png", "batarang\\batarang2.png", "batarang\\batarang3.png", "batarang\\batarang4.png"};
 	GamePanel gp;
 	
-	public Batarang(boolean right, int x, int y, GamePanel gp) {
-		super(right, x, y, gp);
+	public Batarang(boolean right, int x, int y, GamePanel gp, int size) {
+		super(right, x, y, gp, size);
 		vel = 11;
 		sprites = batarangSprites;
 		adjustVertical = 40;
+		this.size = 20;
 		// TODO Auto-generated constructor stub
 	}
 
