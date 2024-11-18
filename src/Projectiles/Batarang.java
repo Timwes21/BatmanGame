@@ -9,7 +9,7 @@ import Game.GamePanel;
 
 public class Batarang extends Projectile{	
 	float index;
-	String[] batarangSprites = {"batarang\\batarang1.png", "batarang\\batarang2.png", "batarang\\batarang3.png", "batarang\\batarang4.png"};
+	String[] batarangSprites = {"Resources\\batarang\\batarang1.png", "Resources\\batarang\\batarang2.png", "Resources\\batarang\\batarang3.png", "Resources\\batarang\\batarang4.png"};
 	GamePanel gp;
 	
 	public Batarang(boolean right, int x, int y, GamePanel gp, int size) {

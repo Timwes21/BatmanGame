@@ -224,7 +224,7 @@ public class GamePanel extends JPanel implements Runnable{
 			}
 			
 			if (enemy.throwAxe && enemy.ammo == 1) {
-				axes.add(new Axe(enemy.right, enemy.x, enemy.y, this));
+				axes.add(new Axe(enemy.right, enemy.x, enemy.y, this, 20));
 				enemy.throwAxe = false;
 				enemy.ammo = 0;
 				

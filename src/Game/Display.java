@@ -22,11 +22,11 @@ import Projectiles.Bullet;
 public class Display {
 	int WIDTH;
 	int HEIGHT;
-	Image BG = new ImageIcon("bg-game.png").getImage();
-	Image BG_mainMenu = new ImageIcon("altpic.png").getImage();
-	Image BUILDINGS = new ImageIcon("buildings.png").getImage();
-	Image GROUND = new ImageIcon("ground.png").getImage();
-	Image SIGNAL = new ImageIcon("Bat-Signal-PNG-Picture.png").getImage();
+	Image BG = new ImageIcon("Resources\\bg-game.png").getImage();
+	Image BG_mainMenu = new ImageIcon("Resources\\Main Menu img.png").getImage();
+	Image BUILDINGS = new ImageIcon("Resources\\buildings.png").getImage();
+	Image GROUND = new ImageIcon("Resources\\ground.png").getImage();
+	Image SIGNAL = new ImageIcon("Resources\\Bat-Signal-PNG-Picture.png").getImage();
 	GamePanel gp;
 	Color transparent = new Color(0,0,0,200);
 	String currentemblem;

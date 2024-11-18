@@ -8,8 +8,8 @@ public class Axe extends Projectile{
 	public boolean hit;
 
 
-	public Axe(boolean right, int x, int y, GamePanel gp) {
-		super(right, x, y, gp);
+	public Axe(boolean right, int x, int y, GamePanel gp, int size) {
+		super(right, x, y, gp, size);
 		// TODO Auto-generated constructor stub
 	}
 	

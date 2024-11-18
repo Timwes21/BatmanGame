@@ -24,7 +24,7 @@ public class Window extends JFrame {
     	
     	gamePanel = new GamePanel();
     	mainMenu = new MainMenuPanel();
-        windowIcon = new ImageIcon("emblempic.png").getImage();
+        windowIcon = new ImageIcon("Resources\\emblempic.png").getImage();
        
     	
         
