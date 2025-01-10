@@ -22,11 +22,11 @@ import Projectiles.Bullet;
 public class Display {
 	int WIDTH;
 	int HEIGHT;
-	Image BG = new ImageIcon("Resources\\bg-game.png").getImage();
-	Image BG_mainMenu = new ImageIcon("Resources\\Main Menu img.png").getImage();
-	Image BUILDINGS = new ImageIcon("Resources\\buildings.png").getImage();
-	Image GROUND = new ImageIcon("Resources\\ground.png").getImage();
-	Image SIGNAL = new ImageIcon("Resources\\Bat-Signal-PNG-Picture.png").getImage();
+	Image BG = new ImageIcon(getClass().getResource("/Resources/bg-game.png")).getImage();
+	Image BG_mainMenu = new ImageIcon(getClass().getResource("/Resources/Main_menu_img.png")).getImage();
+	Image BUILDINGS = new ImageIcon(getClass().getResource("/Resources/buildings.png")).getImage();
+	Image GROUND = new ImageIcon(getClass().getResource("/Resources/ground.png")).getImage();
+	Image SIGNAL = new ImageIcon(getClass().getResource("/Resources/Bat-Signal-PNG-Picture.png")).getImage();
 	GamePanel gp;
 	Color transparent = new Color(0,0,0,200);
 	String currentemblem;
@@ -87,6 +87,7 @@ public class Display {
 	
 	
 	public void mainMenu(Graphics2D g2) {
+		
 		g2.drawImage(BG_mainMenu, 0, 0, WIDTH+40, HEIGHT, gp);
     	
     	g2.setFont(batFont2);
@@ -174,12 +175,6 @@ public class Display {
 		int controlsY = HEIGHT/2-40;
 		int enemiesListX = controlsX+250;
 		//System.out.println(n);
-		enemy1Emblem = new ImageIcon(currentknifeGuySprite).getImage();
-		gunGuyEmblem = new ImageIcon(currentgunGuySprite).getImage();
-		mimeEmblem = new ImageIcon(currentMimeSprite).getImage();
-		axeGuyEmblem = new ImageIcon(currentAxeGuySprite).getImage();
-		fireMimeEmblem = new ImageIcon(currentFireMimeSprite).getImage();
-		rocketGuyEmblem = new ImageIcon(currentRocketGuySprite).getImage();
 		g2.drawString("press r to resume", WIDTH-255, 20);
 		g2.setColor(transparent);
 		g2.fillRoundRect(WIDTH/2-250, 100, 500, 300, 25, 25);
@@ -198,13 +193,31 @@ public class Display {
 		g2.drawString("Block...............SPACE", controlsX, controlsY + 160);
 		g2.drawLine(WIDTH/2, HEIGHT/2-80, WIDTH/2, 390);
 		g2.drawString("ENEMIES:", enemiesListX, controlsY -30);
-		g2.drawImage(enemy1Emblem, enemiesListX, controlsY-20, 50, 50, gp);
-		g2.drawImage(gunGuyEmblem, enemiesListX + 90, controlsY-20, 50, 50, gp);
-		g2.drawImage(mimeEmblem, enemiesListX +170, controlsY-20, 50, 50, gp);
-		g2.drawImage(axeGuyEmblem, enemiesListX, controlsY+70, 50, 50, gp);
-		g2.drawImage(fireMimeEmblem, enemiesListX + 90, controlsY+70, 50, 50, gp);
-		g2.drawImage(rocketGuyEmblem, enemiesListX +160, controlsY+70, 70, 50, gp);
 		g2.setFont(new Font("Lucida Sans Typewriter", Font.PLAIN, 10));
+		if (currentknifeGuySprite != null) {
+			enemy1Emblem = new ImageIcon(getClass().getResource(currentknifeGuySprite)).getImage();
+			g2.drawImage(enemy1Emblem, enemiesListX, controlsY-20, 50, 50, gp);	
+		}
+		if (currentgunGuySprite != null) {
+			gunGuyEmblem = new ImageIcon(getClass().getResource(currentgunGuySprite)).getImage();
+			g2.drawImage(gunGuyEmblem, enemiesListX + 90, controlsY-20, 50, 50, gp);			
+		}
+		if (currentMimeSprite != null) {
+			mimeEmblem = new ImageIcon(getClass().getResource(currentMimeSprite)).getImage();
+			g2.drawImage(mimeEmblem, enemiesListX +170, controlsY-20, 50, 50, gp);			
+		}
+		if (currentAxeGuySprite != null) {
+			axeGuyEmblem = new ImageIcon(getClass().getResource(currentAxeGuySprite)).getImage();
+			g2.drawImage(axeGuyEmblem, enemiesListX, controlsY+70, 50, 50, gp);			
+		}
+		if (currentFireMimeSprite != null) {
+			fireMimeEmblem = new ImageIcon(getClass().getResource(currentFireMimeSprite)).getImage();			
+			g2.drawImage(fireMimeEmblem, enemiesListX + 90, controlsY+70, 50, 50, gp);			
+		}
+		if (currentRocketGuySprite != null) {
+			rocketGuyEmblem = new ImageIcon(getClass().getResource(currentRocketGuySprite)).getImage();
+			g2.drawImage(rocketGuyEmblem, enemiesListX +160, controlsY+70, 70, 50, gp);
+		}
 		g2.drawString("Knife guy", enemiesListX, controlsY+40);
 		g2.drawString("Gun guy", enemiesListX+90, controlsY+40);
 		g2.drawString("Mime", enemiesListX+90*2, controlsY+40);
@@ -247,8 +260,7 @@ public class Display {
 	
 	
 	public float animate(String[] sprites, float index) {
-		index += .15;
-		System.out.println(index);
+		index += .1;
 		if (index >= sprites.length-1) {
 			index = 0;
 		}

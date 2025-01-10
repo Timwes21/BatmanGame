@@ -63,8 +63,7 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	
 	GamePanel(){
-		//emblem = new JLabel("emblempic.png");
-		//emblem.setBackground(Color.red);
+		
 		setFocusable(true);
 		setLayout(null);
 		setPreferredSize(SCREEN_SIZE);
@@ -122,7 +121,7 @@ public class GamePanel extends JPanel implements Runnable{
 				}
 				else {
 					if (pause == false) {
-						//System.out.println(batman.batarangs.size());
+						
 						dead = false;
 						batman.movement(enemies);
 						enemyMovement();
@@ -131,7 +130,7 @@ public class GamePanel extends JPanel implements Runnable{
 						handleBullets();
 						handleAxes();
 						handleRockets();
-						//System.out.println(enemies.size());
+
 					}
 					else {
 						
@@ -142,10 +141,10 @@ public class GamePanel extends JPanel implements Runnable{
 					
 				}
 				
-				//checkCollision();
+				
 				repaint();
 				delta--;
-				//System.out.println("test");
+				
 			}
 		}
 		
@@ -289,7 +288,7 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	
 	public void handleAxes() {
-		System.out.println(axes.size());
+		
 		Iterator<Axe> iterator = axes.iterator();
 	    while (iterator.hasNext()) {
 	    	Axe axe = iterator.next();

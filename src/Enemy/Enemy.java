@@ -85,7 +85,7 @@ public abstract class Enemy{
 	
 	
 	public void draw(Graphics2D g2) {
-		Image CurrentSprite = new ImageIcon(currentSpritePath).getImage();
+		Image CurrentSprite = new ImageIcon(getClass().getResource(currentSpritePath)).getImage();
 		if(flipImage) {
 			g2.drawImage(CurrentSprite, x+WIDTH, y, -WIDTH, HEIGHT, gp);
 		}

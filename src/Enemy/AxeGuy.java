@@ -34,9 +34,7 @@ public class AxeGuy extends Enemy{
 
 	
 	public void attack2() {
-		//System.out.println(knockedOut);
 		if (inRange == false) {
-			//System.out.println(true);
 			if (strike2) {
 				strike2 = animate(throwAxeSprites, strike2);
 			}
