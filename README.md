@@ -45,7 +45,7 @@
 
 
 ## Why?
-After watching many techwithtim tutorials with pygame, i felt confident I could make a game on my own. And why not make one for my (second) favorite character. It started out in pygame, but python wasn't equipped to handle multiple objects as the background images, and I did not want to go to a photo editor. I started over in Java, learning how to paint images on screen, and implement the game loop. Afterwards, I continued where i left off in python.  
+After watching many techwithtim tutorials with pygame, i felt confident I could make a game on my own. And why not make one for my (second) favorite character. It started out in pygame, but python wasn't equipped to handle multiple objects as the background images, and I did not want to go to a photo editor. I started over in Java, learning how to paint images on screen, and implement the game loop. Afterwards, I continued where I left off in python.  
 
 
 
