@@ -50,5 +50,5 @@ After watching many techwithtim tutorials with pygame, i felt confident I could 
 
 
 ## Acknowledgments
-- Sprites and images used in the game were sourced online.
+- Sprites and images used in the game were sourced online. (https://www.spriters-resource.com)
 - Inspired by classic 2D action games and Batman the New Animated series.
