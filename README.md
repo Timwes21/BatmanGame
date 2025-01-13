@@ -6,6 +6,7 @@
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [Future Improvements](#future-improvements)
+- [Why?](#why)
 - [Acknowledgments](#acknowledgments)
 
 
